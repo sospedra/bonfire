@@ -1,25 +1,30 @@
-import { useCallback, useEffect, useReducer, useRef } from 'react'
+import {
+  MutableRefObject,
+  useCallback,
+  useEffect,
+  useReducer,
+  useRef,
+} from 'react'
 import { toTime } from './toTime'
+import { createSong } from './create-song'
 
-type Song = Parameters<
-  Parameters<ReturnType<typeof window.SC.Widget>['getCurrentSound']>[0]
->[0]
 type Progress = {
   currentPosition: number
   relativePosition: number
 }
 
 const defaultState = {
-  song: { user: {} } as Song,
+  song: { user: {} } as Sound,
   isReady: false,
   isPlaying: false,
   duration: '0:00',
   time: '0:00',
   progress: 0,
   progressEnd: 0,
+  pristine: true,
 }
 
-export const usePlayback = () => {
+export const usePlayback = (audio: MutableRefObject<HTMLAudioElement>) => {
   const iframe = useRef<HTMLIFrameElement>()
   const widget = useRef<ReturnType<typeof window.SC.Widget>>()
   const [state, dispatch] = useReducer(
@@ -27,7 +32,7 @@ export const usePlayback = () => {
       state: typeof defaultState,
       action:
         | { type: 'ready' }
-        | { type: 'play'; song: Song }
+        | { type: 'play'; sound: Sound }
         | { type: 'pause' }
         | { type: 'progress'; progress: Progress },
     ) => {
@@ -36,12 +41,19 @@ export const usePlayback = () => {
           return { ...state, isReady: true }
         }
         case 'play': {
+          const song = createSong(action.sound)
+
+          if (state.pristine) {
+            audio.current.play()
+          }
+
           return {
             ...state,
-            song: action.song,
-            duration: toTime(action.song.duration),
-            progressEnd: action.song.duration,
+            song,
+            duration: toTime(song.duration),
+            progressEnd: song.duration,
             isPlaying: true,
+            pristine: false,
           }
         }
         case 'pause': {
@@ -62,7 +74,7 @@ export const usePlayback = () => {
     () => (
       <iframe
         allow='autoplay'
-        // className='hidden'
+        className='hidden'
         ref={iframe}
         scrolling='no'
         src='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1201400941&color=%230c1c04&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false'
@@ -87,10 +99,10 @@ export const usePlayback = () => {
             dispatch({ type: 'ready' })
 
             widget.current.bind(window.SC.Widget.Events.PLAY, () => {
-              widget.current.getCurrentSound((song) => {
+              widget.current.getCurrentSound((sound) => {
                 dispatch({
                   type: 'play',
-                  song,
+                  sound,
                 })
               })
             })

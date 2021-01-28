@@ -1,0 +1,10 @@
+.progress {
+  @apply flex flex-1 h-1 mx-2;
+}
+
+.progress::-webkit-progress-bar {
+  @apply rounded;
+}
+.progress::-webkit-progress-value {
+  @apply bg-white rounded;
+}

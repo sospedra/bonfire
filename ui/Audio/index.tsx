@@ -1,54 +1,56 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-export const Audio: React.FC<{}> = () => {
-  const ref = useRef<HTMLAudioElement>()
+export const useAudio = () => {
+  const audio = useRef<HTMLAudioElement>()
   const [status, setStatus] = useState<'pause' | 'play'>('pause')
   const play = useCallback(() => setStatus('play'), [])
   const pause = useCallback(() => setStatus('pause'), [])
 
   useEffect(() => {
-    if (ref.current) {
-      ref.current.addEventListener('play', play)
-      ref.current.addEventListener('pause', pause)
+    if (audio.current) {
+      audio.current.volume = 0.5
+      audio.current.addEventListener('play', play)
+      audio.current.addEventListener('pause', pause)
     }
     return () => {
-      if (ref.current) {
-        ref.current.removeEventListener('play', play)
-        ref.current.removeEventListener('pause', pause)
+      if (audio.current) {
+        audio.current.removeEventListener('play', play)
+        audio.current.removeEventListener('pause', pause)
       }
     }
-  }, [ref])
+  }, [audio])
+  const Audio = useMemo(
+    () => (
+      <div>
+        <audio ref={audio} loop preload='auto'>
+          <source src='/bonfire.aac' type='audio/aac' />
+        </audio>
 
-  return (
-    <div>
-      <audio ref={ref} loop preload='auto'>
-        <source src='/bonfire.aac' type='audio/aac' />
-      </audio>
-
-      <button
-        className='flex flex-row items-center'
-        onClick={() => {
-          switch (status) {
-            case 'pause':
-              return ref.current?.play()
-            case 'play':
-              return ref.current?.pause()
-          }
-        }}
-      >
-        <span className='flex items-center justify-center w-8 h-8 mr-2 text-sm text-center bg-white rounded-full bg-opacity-30'>
-          {status === 'play' ? (
-            <span className='flex pl-1' aria-label='speaker on'>
-              🔊
-            </span>
-          ) : (
-            <span className='flex pl-1' aria-label='speaker off'>
-              🔇
-            </span>
-          )}
-        </span>
-        Ambience sound
-      </button>
-    </div>
+        <button
+          className='flex flex-row items-center justify-end w-full text-sm'
+          onClick={() => {
+            switch (status) {
+              case 'pause':
+                return audio.current?.play()
+              case 'play':
+                return audio.current?.pause()
+            }
+          }}
+        >
+          <input
+            type='checkbox'
+            name='ambience'
+            checked={status === 'play'}
+            className='cursor-pointer'
+          />
+          <label htmlFor='ambience' className='ml-1 cursor-pointer'>
+            ambience sound
+          </label>
+        </button>
+      </div>
+    ),
+    [status, audio],
   )
+
+  return { Audio, audio }
 }

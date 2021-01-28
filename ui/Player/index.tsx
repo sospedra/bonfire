@@ -1,6 +1,10 @@
+import { MutableRefObject } from 'react'
 import { usePlayback } from '../../service/use-playback'
+import css from './player.module.css'
 
-export const Player: React.FC<{}> = () => {
+export const Player: React.FC<{
+  audio: MutableRefObject<HTMLAudioElement>
+}> = (props) => {
   const {
     Soundcloud,
     progress,
@@ -11,27 +15,26 @@ export const Player: React.FC<{}> = () => {
     time,
     duration,
     song,
-  } = usePlayback()
+  } = usePlayback(props.audio)
 
   return (
     <div>
       <Soundcloud />
-      <div className='flex flex-row items-center justify-between'>
+      <div className='flex flex-row items-center justify-between w-80'>
         <div>
-          <p className='overflow-ellipsis'>{song.user.username}</p>
           <p className='overflow-ellipsis'>{song.title}</p>
         </div>
         <div>
           {isPlaying ? (
-            <button onClick={pause}>Pause</button>
+            <button onClick={pause}>⏸</button>
           ) : (
-            <button onClick={play}>Play</button>
+            <button onClick={play}>▶️</button>
           )}
         </div>
       </div>
-      <div className='flex flex-row items-center justify-between'>
+      <div className='flex flex-row items-center justify-between font-mono text-xs'>
         <span>{time}</span>
-        <progress className='mx-2' max={progressEnd} value={progress} />
+        <progress className={css.progress} max={progressEnd} value={progress} />
         <span>{duration}</span>
       </div>
     </div>

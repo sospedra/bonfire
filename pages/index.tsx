@@ -1,10 +1,12 @@
 import Head from 'next/head'
-import { Audio } from '../ui/Audio'
+import { useAudio } from '../ui/Audio'
 import { Background } from '../ui/Background'
+import { Footer } from '../ui/Footer'
 import { Player } from '../ui/Player'
 import { Timer } from '../ui/Timer'
 
 export default function Home() {
+  const { Audio, audio } = useAudio()
   return (
     <div className='text-white'>
       <Head>
@@ -26,13 +28,11 @@ export default function Home() {
       <div className='fixed right-0 flex flex-col items-center justify-between w-full h-screen p-4 lg:p-12 lg:w-2/3 lg:left-1/3 bg-gradient-to-r from-transparent to-black'>
         <main className='flex flex-col justify-center flex-1'>
           <Timer />
-          <Player />
-          <Audio />
+          <Player audio={audio} />
+          {Audio}
         </main>
 
-        <footer className='flex'>
-          <p>footah</p>
-        </footer>
+        <Footer />
       </div>
     </div>
   )
