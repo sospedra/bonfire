@@ -40,7 +40,7 @@ export const useAudio = () => {
           <input
             type='checkbox'
             name='ambience'
-            checked={status === 'play'}
+            defaultChecked={status === 'play'}
             className='cursor-pointer'
           />
           <label htmlFor='ambience' className='ml-1 cursor-pointer'>

@@ -5,7 +5,7 @@ import {
   useReducer,
   useRef,
 } from 'react'
-import { toTime } from './toTime'
+import { toTime } from '../time/toTime'
 import { createSong } from './create-song'
 
 type Progress = {
