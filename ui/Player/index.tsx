@@ -20,7 +20,7 @@ export const Player: React.FC<{
   return (
     <div>
       <Soundcloud />
-      <div className='flex flex-row items-center justify-between w-80'>
+      <div className='flex flex-row items-center justify-between'>
         <div>
           <p className='overflow-ellipsis'>{song.title}</p>
         </div>

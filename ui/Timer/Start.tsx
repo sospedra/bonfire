@@ -8,7 +8,7 @@ export const Start: React.FC<{ onSelect: (mode: 'long' | 'short') => any }> = (
         className='flex flex-col items-center justify-center flex-1 p-4 mr-2 font-bold border-2 border-white rounded hover:underline'
       >
         <p>Start long session</p>
-        <p>(2 hours)</p>
+        <p>(1h 45min)</p>
       </button>
       <button
         onClick={() => props.onSelect('short')}

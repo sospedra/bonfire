@@ -13,7 +13,7 @@
 }
 
 .dash {
-  @apply relative inline-block w-full mx-4 bg-gray-500 rounded;
+  @apply relative inline-block w-full mx-1 bg-gray-500 rounded;
   height: 0.12rem;
 }
 
@@ -24,6 +24,10 @@
 
 .dashDone:before {
   @apply scale-x-100;
+}
+
+.work {
+  @apply transform rotate-45 skew-x-6 skew-y-6 rounded-none;
 }
 
 @keyframes pulse {

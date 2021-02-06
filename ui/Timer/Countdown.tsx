@@ -37,34 +37,23 @@ export const Countdown: React.FC<{
       </p>
       <div className='flex flex-row items-center justify-between w-full mt-4'>
         {plan.map(({ type }, position) => {
-          const index = Math.floor(position / 2)
-          if (type === 'work') {
-            return (
+          return (
+            <>
               <div
-                className={`${css.bullet} ${
-                  index === status.index ? css.bulletActive : ''
-                } ${index <= status.index ? css.bulletDone : ''}`}
+                className={`${css.bullet} ${css[type]} ${
+                  position === status.index ? css.bulletActive : ''
+                } ${position <= status.index ? css.bulletDone : ''}`}
               />
-            )
-          }
-
-          if (type === 'rest') {
-            return (
-              <div
-                className={`${css.dash} ${
-                  index < status.index ? css.dashDone : ''
-                }`}
-              />
-            )
-          }
-
-          return null
+              {position !== plan.length - 1 && (
+                <div
+                  className={`${css.dash} ${
+                    position < status.index ? css.dashDone : ''
+                  }`}
+                />
+              )}
+            </>
+          )
         })}
-        <div
-          className={`${css.bullet} ${
-            plan.length - 1 === status.index ? css.bulletActive : ''
-          } ${plan.length - 1 <= status.index ? css.bulletDone : ''}`}
-        />
       </div>
     </div>
   )

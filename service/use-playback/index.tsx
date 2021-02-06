@@ -72,13 +72,14 @@ export const usePlayback = (audio: MutableRefObject<HTMLAudioElement>) => {
   )
   const Soundcloud = useCallback(
     () => (
-      <iframe
-        allow='autoplay'
-        className='hidden'
-        ref={iframe}
-        scrolling='no'
-        src='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1201400941&color=%230c1c04&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false'
-      />
+      <div className='absolute hidden w-0 h-0 overflow-hidden'>
+        <iframe
+          allow='autoplay'
+          ref={iframe}
+          scrolling='no'
+          src='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1201400941&color=%230c1c04&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false'
+        />
+      </div>
     ),
     [],
   )
