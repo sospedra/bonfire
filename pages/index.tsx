@@ -3,6 +3,7 @@ import { useAudio } from '../ui/Audio'
 import { Background } from '../ui/Background'
 import { Footer } from '../ui/Footer'
 import { Player } from '../ui/Player'
+import { Settings } from '../ui/Settings'
 import { Timer } from '../ui/Timer'
 
 export default function Home() {
@@ -32,6 +33,7 @@ export default function Home() {
           {Audio}
         </main>
 
+        <Settings />
         <Footer />
       </div>
     </div>
