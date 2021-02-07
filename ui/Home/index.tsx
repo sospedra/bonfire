@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { Goatcounter } from '../../service/analytics'
 import { useAudio } from '../Audio'
 import { Background } from '../Background'
 import { Footer } from '../Footer'
@@ -12,14 +13,10 @@ export const Home: React.FC<{ playlistID: string }> = (props) => {
     <div className='text-white'>
       <Head>
         <title>Bonfire | The work room</title>
+        <Goatcounter />
         <script
           src='https://w.soundcloud.com/player/api.js'
           type='text/javascript'
-        />
-        <script
-          data-goatcounter='https://sospedra.goatcounter.com/count'
-          async
-          src='//gc.zgo.at/count.js'
         />
         <link
           rel='icon'
