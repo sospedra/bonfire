@@ -39,8 +39,7 @@ export const plans: {
   short: [
     {
       type: 'work',
-      // time: toMiliseconds(20),
-      time: 7000,
+      time: toMiliseconds(20),
     },
     {
       type: 'rest',

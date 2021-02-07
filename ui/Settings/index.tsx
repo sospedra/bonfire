@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import { Playlist } from './Playlist'
 
 export const Settings: React.FC<{}> = () => {
   const [modalVisibility, setModalVisibility] = useState<'hidden' | 'block'>(
@@ -28,8 +29,27 @@ export const Settings: React.FC<{}> = () => {
           <h1 className='text-6xl font-bold'>Bonfire</h1>
           <h2 className='pb-6 text-2xl'>The working room</h2>
           <h3 className='py-4 text-xl'>How it works?</h3>
+          <p>
+            Bonfire merges music, ambience sounds and a extreme Pomodoro
+            technique to help you boost your performance
+          </p>
+          <p>
+            Here you cannot stop, skip or pause stages. Instead, you have to
+            commit to a fixed workload.
+          </p>
+          <p>
+            Light your bonfire and screen share on a videocall! The more the
+            merrier
+          </p>
           <h3 className='py-4 text-xl'>Settings</h3>
+          <Playlist />
           <h3 className='py-4 text-xl'>Credits</h3>
+          <ul>
+            <li>Video by XX</li>
+            <li>Bonfire audio by XX</li>
+            <li>Pips audio by XX</li>
+            <li>Default playlist by XX</li>
+          </ul>
         </div>
       </aside>
     </div>

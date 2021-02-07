@@ -4,6 +4,7 @@ import css from './player.module.css'
 
 export const Player: React.FC<{
   audio: MutableRefObject<HTMLAudioElement>
+  playlistID: string
 }> = (props) => {
   const {
     Soundcloud,
@@ -15,7 +16,7 @@ export const Player: React.FC<{
     time,
     duration,
     song,
-  } = usePlayback(props.audio)
+  } = usePlayback(props.audio, props.playlistID)
 
   return (
     <div>

@@ -24,7 +24,10 @@ const defaultState = {
   pristine: true,
 }
 
-export const usePlayback = (audio: MutableRefObject<HTMLAudioElement>) => {
+export const usePlayback = (
+  audio: MutableRefObject<HTMLAudioElement>,
+  playlistID: string,
+) => {
   const iframe = useRef<HTMLIFrameElement>()
   const widget = useRef<ReturnType<typeof window.SC.Widget>>()
   const [state, dispatch] = useReducer(
@@ -77,7 +80,7 @@ export const usePlayback = (audio: MutableRefObject<HTMLAudioElement>) => {
           allow='autoplay'
           ref={iframe}
           scrolling='no'
-          src='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1201400941&color=%230c1c04&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false'
+          src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/${playlistID}&color=%230c1c04&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false`}
         />
       </div>
     ),
