@@ -8,6 +8,7 @@ export const Countdown: React.FC<{
   mode: 'long' | 'short'
   done: () => void
 }> = (props) => {
+  const audio = useRef<HTMLAudioElement>()
   const { current: plan } = useRef(plans[props.mode])
   const [status, setStatus] = useState({
     index: 0,
@@ -16,6 +17,10 @@ export const Countdown: React.FC<{
 
   useInterval(() => {
     if (status.countdown > 0) {
+      if (status.countdown === 5000) {
+        audio.current.play()
+      }
+
       setStatus({
         ...status,
         countdown: status.countdown - 1000,
@@ -32,6 +37,10 @@ export const Countdown: React.FC<{
 
   return (
     <div>
+      <audio ref={audio} preload='auto'>
+        <source src='/pips.aac' type='audio/aac' />
+      </audio>
+
       <p className='font-mono text-center text-8xl'>
         {toTime(status.countdown)}
       </p>
