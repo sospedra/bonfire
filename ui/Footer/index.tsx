@@ -1,3 +1,4 @@
+import { ExternalLink } from '../ExternalLink'
 import css from './footer.module.css'
 
 export const Footer: React.FC<{}> = () => {
@@ -5,14 +6,9 @@ export const Footer: React.FC<{}> = () => {
     <footer className='flex text-xs italic text-center'>
       <p>
         hand-crafted with 💜 by{' '}
-        <a
-          href='https://sospedra.me'
-          target='_blank'
-          rel='noopener noreferrer'
-          className={css.signature}
-        >
+        <ExternalLink href='https://sospedra.me' className={css.signature}>
           sospedra
-        </a>
+        </ExternalLink>
       </p>
     </footer>
   )
