@@ -13,7 +13,7 @@ export const plans: {
     },
     {
       type: 'rest',
-      time: toMiliseconds(10),
+      time: toMiliseconds(5),
     },
     {
       type: 'work',
@@ -25,7 +25,7 @@ export const plans: {
     },
     {
       type: 'work',
-      time: toMiliseconds(20),
+      time: toMiliseconds(25),
     },
     {
       type: 'rest',

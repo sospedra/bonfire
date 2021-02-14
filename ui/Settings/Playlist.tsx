@@ -29,27 +29,29 @@ export const Playlist: React.FC<{}> = () => {
           <span aria-label='help'>?</span>
         </ExternalLink>
       </label>
-      <div className='flex flex-row w-full mt-2'>
+      <div className='flex flex-row flex-wrap w-full'>
         <input
           type='text'
           minLength={10}
           required
           placeholder='<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1198136710&color=%230c1c04&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/barradeen" title="Barradeen" target="_blank" style="color: #cccccc; text-decoration: none;">Barradeen</a> · <a href="https://soundcloud.com/barradeen/sets/spotify" title="spotify" target="_blank" style="color: #cccccc; text-decoration: none;">spotify</a></div>'
-          className='flex-1 px-2 py-1 mr-2 text-black rounded'
+          className='flex-1 px-2 py-1 mt-2 mr-2 text-black rounded'
           ref={input}
           id='playlist'
         />
         <input
-          className='px-2 py-1 bg-black border-2 border-white rounded cursor-pointer hover:underline'
+          className={`${
+            status === 'warn' ? 'bg-yellow-700' : ''
+          } px-2 py-1 mt-2 bg-black border-2 border-white rounded cursor-pointer hover:underline`}
           type='submit'
-          value='Set playlist'
+          value={status === 'warn' ? 'Save now' : 'Set playlist'}
         />
       </div>
       <p className='italic text-yellow-300'>
         {status === 'warn' ? (
           'This will reload the page immediately'
         ) : (
-          <span className='text-transparent'>lol</span>
+          <span className='text-transparent'>_</span>
         )}
       </p>
     </form>
