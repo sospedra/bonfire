@@ -75,7 +75,10 @@ export const usePlayback = (
   )
   const Soundcloud = useCallback(
     () => (
-      <div className='absolute hidden w-0 h-0 overflow-hidden'>
+      <div
+        style={{ display: 'none' }}
+        className='absolute hidden w-0 h-0 overflow-hidden'
+      >
         <iframe
           allow='autoplay'
           ref={iframe}
