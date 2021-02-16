@@ -75,6 +75,22 @@ export const Settings: React.FC<{}> = () => {
                 </ExternalLink>
               </li>
             </ul>
+            <h3 className='py-4 text-xl font-bold'>Privacy</h3>
+            <p className='py-1'>
+              No tracking of any kind. No cookies. No spy. No fingerprints.
+            </p>
+            <p className='py-1'>
+              Anything you stream through this website you do under your own
+              responsibility. Bear in mind if you stream some music through
+              different platforms, that you might incur a copyright felony.
+            </p>
+            <p className='py-1'>
+              Free open-source project. Source code available on{' '}
+              <ExternalLink href='https://github.com/sospedra/bonfire'>
+                GitHub
+              </ExternalLink>
+              .
+            </p>
           </div>
         </aside>
       )}

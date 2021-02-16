@@ -6,13 +6,14 @@ import { Footer } from '../Footer'
 import { Player } from '../Player'
 import { Settings } from '../Settings'
 import { Timer } from '../Timer'
+import { Meta } from './Meta'
 
 export const Home: React.FC<{ playlistID: string }> = (props) => {
   const { Audio, audio } = useAudio()
   return (
     <div className='text-white'>
       <Head>
-        <title>Bonfire | The work room</title>
+        <Meta />
         <Goatcounter />
         <script
           src='https://w.soundcloud.com/player/api.js'
